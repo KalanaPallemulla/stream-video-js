@@ -1,0 +1,53 @@
+.str-video__generic-menu {
+  list-style: none;
+  margin: unset;
+  padding: var(--str-video__spacing-md);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--str-video__spacing-xs);
+
+  .str-video__generic-menu--item {
+    align-items: center;
+
+    gap: 8px;
+
+    font-weight: 600;
+    font-size: var(--str-video__font-size-md);
+
+    display: flex;
+    button {
+      all: unset;
+      width: 100%;
+      font-size: 13px;
+      border-radius: var(--str-video__border-radius-lg);
+      background-color: var(--str-video__button-primary-base);
+      padding: var(--str-video__spacing-xs) var(--str-video__spacing-lg);
+      gap: 10px;
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      &:hover {
+        background-color: var(--str-video__button-default-hover);
+        cursor: pointer;
+      }
+
+      &--selected,
+      &--active {
+        background-color: var(--str-video__button-primary-hover);
+      }
+    }
+
+    // TODO: remove once "device selector" component becomes reusable
+    button[aria-selected] {
+      padding: 5px 10px 5px 26px;
+    }
+    button[aria-selected='true']::after {
+      content: '●';
+      font-size: 10px;
+      left: 10px;
+      position: absolute;
+    }
+  }
+}

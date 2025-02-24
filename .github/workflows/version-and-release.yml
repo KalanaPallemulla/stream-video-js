@@ -1,0 +1,63 @@
+name: Version and release
+env:
+  STREAM_API_KEY: ${{ vars.CLIENT_TEST_API_KEY }}
+  STREAM_SECRET: ${{ secrets.CLIENT_TEST_SECRET }}
+
+on:
+# Disable the automatic release trigger
+#  push:
+#    branches:
+#      - main
+#    paths:
+#      - 'packages/**'
+
+  workflow_dispatch:
+
+concurrency:
+  group: version-and-release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  version-and-release:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: 'yarn'
+
+      - name: ESLint Cache
+        uses: actions/cache@v4
+        with:
+          path: './.eslintcache'
+          key: ${{ runner.os }}-eslintcache-${{ github.ref_name }}-${{ hashFiles('.eslintcache') }}
+
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Lint Packages
+        run: yarn lint:ci:packages
+
+      - name: Build packages
+        run: NODE_ENV=production yarn build:libs
+
+      - name: Test packages
+        run: yarn test:ci:libs
+
+      - name: Version and release packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+          yarn config set npmRegistryServer https://registry.npmjs.org/
+          yarn config set npmAuthToken ${{ secrets.NPM_TOKEN }}
+          yarn release

@@ -1,0 +1,19 @@
+{
+  "name": "@stream-io/ts-quickstart",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "https=1 vite --host 0.0.0.0",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@stream-io/video-client": "workspace:^"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.4.6"
+  }
+}

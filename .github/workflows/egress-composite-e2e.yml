@@ -1,0 +1,68 @@
+name: Egress Composite E2E
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - 'sample-apps/react/egress-composite/**'
+      - 'packages/client/**'
+      - 'packages/react-sdk/**'
+      - 'packages/styling/**'
+      - 'packages/react-bindings/**'
+env:
+  VITE_STREAM_API_KEY: ${{ vars.EGRESS_STREAM_API_KEY }}
+  VITE_STREAM_USER_TOKEN: ${{ secrets.EGRESS_USER_TOKEN }}
+
+jobs:
+  test:
+    timeout-minutes: 20
+    # Playwright doesn't work on 24.04.
+    # We need to revisit this and switch to ubuntu-latest when it's supported.
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build packages
+        env:
+          NODE_ENV: production
+        run: yarn build:react:deps
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}${{ runner.arch }}-playwright-browsers
+
+      - name: Install Playwright browsers if not cached
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install chromium
+
+      - name: Install Playwright system dependencies (always)
+        run: npx playwright install-deps
+
+      - name: Run Playwright tests
+        run: yarn workspace @stream-io/egress-composite test:e2e
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: sample-apps/react/egress-composite/test-results/
+          retention-days: 5

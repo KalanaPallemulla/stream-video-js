@@ -1,0 +1,31 @@
+// main entry point for component styles
+
+@use 'src/base';
+@use 'src/global-theme-variables';
+@use 'src/utils';
+
+@import 'src/Avatar';
+@import 'src/Button';
+@import 'src/BackgroundFilters';
+@import 'src/CallControls';
+@import 'src/CallLayout';
+@import 'src/CallParticipantList';
+@import 'src/CallPreview';
+@import 'src/CallRecodingList';
+@import 'src/CallStats';
+@import 'src/DeviceSettings';
+@import 'src/DropdownSelect';
+@import 'src/Icon';
+@import 'src/LoadingIndicator';
+@import 'src/Menu';
+@import 'src/Notification';
+@import 'src/ParticipantView';
+@import 'src/Permissions';
+@import 'src/Reaction';
+@import 'src/RingingCall';
+@import 'src/ScreenShareOverlay';
+@import 'src/Search';
+@import 'src/StreamCall';
+@import 'src/Tooltip';
+@import 'src/Video';
+@import 'src/VideoPreview';

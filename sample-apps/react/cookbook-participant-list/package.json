@@ -1,0 +1,27 @@
+{
+  "name": "@stream-io/cookbook-participant-list",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.5",
+    "@stream-io/video-react-sdk": "workspace:^",
+    "@stream-io/video-styling": "workspace:^",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.2",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.1.0",
+    "typescript": "^5.5.2",
+    "vite": "^5.4.6"
+  }
+}

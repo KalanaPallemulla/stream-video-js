@@ -1,0 +1,119 @@
+.rooms-overview {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.rooms-overview h2 {
+  text-align: center;
+}
+
+.room-listing {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 400px));
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.room-listing-section {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 1rem 1rem;
+}
+
+.room-card-button {
+  padding: 0;
+  background: transparent;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+
+.room-card-button:hover {
+  border-color: var(--prominent-color);
+}
+
+.room-card {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  border-radius: 8px;
+  background: var(--background-color-light);
+  padding: 0.6rem 1.2rem;
+  height: 100%;
+  max-width: 400px;
+  min-width: 0;
+}
+
+.room-card > span {
+  font-weight: lighter;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.hosts-grid {
+  display: flex;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--background-color);
+}
+
+.hosts-grid div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hosts-grid span {
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.room-listing__load-more-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-block: 2rem 0.5rem;
+}
+
+.room-listing-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  padding-block: 1rem;
+  font-size: 1.25rem;
+}
+
+.room-listing-tab {
+  display: flex;
+  align-items: flex-end;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  background: transparent;
+  outline: none;
+}
+
+.room-listing-tab.active,
+.room-listing-tab:hover {
+  background: var(--background-color);
+}
+
+.room-listing-tab.active {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 800px) {
+  .active-room .rooms-overview {
+    width: 100%;
+    overflow: unset;
+    max-width: unset;
+  }
+  .room-listing__load-more-container {
+    padding-bottom: 5rem;
+  }
+}
