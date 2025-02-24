@@ -22,7 +22,7 @@ export const CallControls = ({ onLeave }: CallControlsProps) => (
     <Restricted requiredGrants={[OwnCapability.SEND_VIDEO]}>
       <ToggleVideoPublishingButton />
     </Restricted>
-    <Restricted requiredGrants={[OwnCapability.CREATE_REACTION]}>
+    {/* <Restricted requiredGrants={[OwnCapability.CREATE_REACTION]}>
       <ReactionsButton />
     </Restricted>
     <Restricted requiredGrants={[OwnCapability.SCREENSHARE]}>
@@ -35,7 +35,7 @@ export const CallControls = ({ onLeave }: CallControlsProps) => (
       ]}
     >
       <RecordCallButton />
-    </Restricted>
+    </Restricted> */}
     <CancelCallButton onLeave={onLeave} />
   </div>
 );
